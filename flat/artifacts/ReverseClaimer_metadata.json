@@ -1,0 +1,62 @@
+{
+	"compiler": {
+		"version": "0.8.18+commit.87f61d96"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "contract ENS",
+						"name": "ens",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "claimant",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"flat/NameWrapperFlat.sol": "ReverseClaimer"
+		},
+		"evmVersion": "paris",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"flat/NameWrapperFlat.sol": {
+			"keccak256": "0x50b839d00741e71e21937cd24ec89b660ae7c0083c28df278e0c7786955a9faa",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://1685271ac3160f3cdb0bca50e8184525c5789c5cb3547059d8bd5a032ceb4fb9",
+				"dweb:/ipfs/QmQ6GPhsnMSWBdLaARakmmUytetUTTKnQ1TpoeL8VhVk6q"
+			]
+		}
+	},
+	"version": 1
+}

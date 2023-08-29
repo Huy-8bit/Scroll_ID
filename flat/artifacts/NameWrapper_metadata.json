@@ -1,0 +1,1865 @@
+{
+	"compiler": {
+		"version": "0.8.18+commit.87f61d96"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "contract ENS",
+						"name": "_ens",
+						"type": "address"
+					},
+					{
+						"internalType": "contract IBaseRegistrar",
+						"name": "_registrar",
+						"type": "address"
+					},
+					{
+						"internalType": "contract IMetadataService",
+						"name": "_metadataService",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "CannotUpgrade",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "IncompatibleParent",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"name": "IncorrectTargetOwner",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "IncorrectTokenType",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "labelHash",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "expectedLabelhash",
+						"type": "bytes32"
+					}
+				],
+				"name": "LabelMismatch",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "label",
+						"type": "string"
+					}
+				],
+				"name": "LabelTooLong",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "LabelTooShort",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "NameIsNotWrapped",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "node",
+						"type": "bytes32"
+					}
+				],
+				"name": "OperationProhibited",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "node",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "address",
+						"name": "addr",
+						"type": "address"
+					}
+				],
+				"name": "Unauthorised",
+				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "approved",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "Approval",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "approved",
+						"type": "bool"
+					}
+				],
+				"name": "ApprovalForAll",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "controller",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "active",
+						"type": "bool"
+					}
+				],
+				"name": "ControllerChanged",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "node",
+						"type": "bytes32"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint64",
+						"name": "expiry",
+						"type": "uint64"
+					}
+				],
+				"name": "ExpiryExtended",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "node",
+						"type": "bytes32"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint32",
+						"name": "fuses",
+						"type": "uint32"
+					}
+				],
+				"name": "FusesSet",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "node",
+						"type": "bytes32"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"name": "NameUnwrapped",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "node",
+						"type": "bytes32"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes",
+						"name": "name",
+						"type": "bytes"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint32",
+						"name": "fuses",
+						"type": "uint32"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint64",
+						"name": "expiry",
+						"type": "uint64"
+					}
+				],
+				"name": "NameWrapped",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256[]",
+						"name": "ids",
+						"type": "uint256[]"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256[]",
+						"name": "values",
+						"type": "uint256[]"
+					}
+				],
+				"name": "TransferBatch",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "TransferSingle",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "value",
+						"type": "string"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "URI",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "_tokens",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "node",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "fuseMask",
+						"type": "uint32"
+					}
+				],
+				"name": "allFusesBurned",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "approve",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "balanceOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "accounts",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "ids",
+						"type": "uint256[]"
+					}
+				],
+				"name": "balanceOfBatch",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "node",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "address",
+						"name": "addr",
+						"type": "address"
+					}
+				],
+				"name": "canExtendSubnames",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "node",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "address",
+						"name": "addr",
+						"type": "address"
+					}
+				],
+				"name": "canModifyName",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "controllers",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "ens",
+				"outputs": [
+					{
+						"internalType": "contract ENS",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "parentNode",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "labelhash",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint64",
+						"name": "expiry",
+						"type": "uint64"
+					}
+				],
+				"name": "extendExpiry",
+				"outputs": [
+					{
+						"internalType": "uint64",
+						"name": "",
+						"type": "uint64"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "getApproved",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "getData",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "uint32",
+						"name": "fuses",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint64",
+						"name": "expiry",
+						"type": "uint64"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					}
+				],
+				"name": "isApprovedForAll",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "parentNode",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "labelhash",
+						"type": "bytes32"
+					}
+				],
+				"name": "isWrapped",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "node",
+						"type": "bytes32"
+					}
+				],
+				"name": "isWrapped",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "metadataService",
+				"outputs": [
+					{
+						"internalType": "contract IMetadataService",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "name",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"name": "names",
+				"outputs": [
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "onERC721Received",
+				"outputs": [
+					{
+						"internalType": "bytes4",
+						"name": "",
+						"type": "bytes4"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "ownerOf",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_token",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "recoverFunds",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "label",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "wrappedOwner",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "duration",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "resolver",
+						"type": "address"
+					},
+					{
+						"internalType": "uint16",
+						"name": "ownerControlledFuses",
+						"type": "uint16"
+					}
+				],
+				"name": "registerAndWrapETH2LD",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "registrarExpiry",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "registrar",
+				"outputs": [
+					{
+						"internalType": "contract IBaseRegistrar",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "duration",
+						"type": "uint256"
+					}
+				],
+				"name": "renew",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "expires",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "ids",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "amounts",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "safeBatchTransferFrom",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "safeTransferFrom",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "approved",
+						"type": "bool"
+					}
+				],
+				"name": "setApprovalForAll",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "parentNode",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "labelhash",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "fuses",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint64",
+						"name": "expiry",
+						"type": "uint64"
+					}
+				],
+				"name": "setChildFuses",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "controller",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "active",
+						"type": "bool"
+					}
+				],
+				"name": "setController",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "node",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint16",
+						"name": "ownerControlledFuses",
+						"type": "uint16"
+					}
+				],
+				"name": "setFuses",
+				"outputs": [
+					{
+						"internalType": "uint32",
+						"name": "",
+						"type": "uint32"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "contract IMetadataService",
+						"name": "_metadataService",
+						"type": "address"
+					}
+				],
+				"name": "setMetadataService",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "node",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "resolver",
+						"type": "address"
+					},
+					{
+						"internalType": "uint64",
+						"name": "ttl",
+						"type": "uint64"
+					}
+				],
+				"name": "setRecord",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "node",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "address",
+						"name": "resolver",
+						"type": "address"
+					}
+				],
+				"name": "setResolver",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "parentNode",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "string",
+						"name": "label",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "uint32",
+						"name": "fuses",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint64",
+						"name": "expiry",
+						"type": "uint64"
+					}
+				],
+				"name": "setSubnodeOwner",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "node",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "parentNode",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "string",
+						"name": "label",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "resolver",
+						"type": "address"
+					},
+					{
+						"internalType": "uint64",
+						"name": "ttl",
+						"type": "uint64"
+					},
+					{
+						"internalType": "uint32",
+						"name": "fuses",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint64",
+						"name": "expiry",
+						"type": "uint64"
+					}
+				],
+				"name": "setSubnodeRecord",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "node",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "node",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint64",
+						"name": "ttl",
+						"type": "uint64"
+					}
+				],
+				"name": "setTTL",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "contract INameWrapperUpgrade",
+						"name": "_upgradeAddress",
+						"type": "address"
+					}
+				],
+				"name": "setUpgradeContract",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes4",
+						"name": "interfaceId",
+						"type": "bytes4"
+					}
+				],
+				"name": "supportsInterface",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "parentNode",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "labelhash",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "address",
+						"name": "controller",
+						"type": "address"
+					}
+				],
+				"name": "unwrap",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "labelhash",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "address",
+						"name": "registrant",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "controller",
+						"type": "address"
+					}
+				],
+				"name": "unwrapETH2LD",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "name",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes",
+						"name": "extraData",
+						"type": "bytes"
+					}
+				],
+				"name": "upgrade",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "upgradeContract",
+				"outputs": [
+					{
+						"internalType": "contract INameWrapperUpgrade",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "uri",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "name",
+						"type": "bytes"
+					},
+					{
+						"internalType": "address",
+						"name": "wrappedOwner",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "resolver",
+						"type": "address"
+					}
+				],
+				"name": "wrap",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "label",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "wrappedOwner",
+						"type": "address"
+					},
+					{
+						"internalType": "uint16",
+						"name": "ownerControlledFuses",
+						"type": "uint16"
+					},
+					{
+						"internalType": "address",
+						"name": "resolver",
+						"type": "address"
+					}
+				],
+				"name": "wrapETH2LD",
+				"outputs": [
+					{
+						"internalType": "uint64",
+						"name": "expiry",
+						"type": "uint64"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"events": {
+				"Approval(address,address,uint256)": {
+					"details": "Emitted when `owner` enables `approved` to manage the `tokenId` token."
+				},
+				"ApprovalForAll(address,address,bool)": {
+					"details": "Emitted when `account` grants or revokes permission to `operator` to transfer their tokens, according to `approved`."
+				},
+				"TransferBatch(address,address,address,uint256[],uint256[])": {
+					"details": "Equivalent to multiple {TransferSingle} events, where `operator`, `from` and `to` are the same for all transfers."
+				},
+				"TransferSingle(address,address,address,uint256,uint256)": {
+					"details": "Emitted when `value` tokens of token type `id` are transferred from `from` to `to` by `operator`."
+				},
+				"URI(string,uint256)": {
+					"details": "Emitted when the URI for token type `id` changes to `value`, if it is a non-programmatic URI. If an {URI} event was emitted for `id`, the standard https://eips.ethereum.org/EIPS/eip-1155#metadata-extensions[guarantees] that `value` will equal the value returned by {IERC1155MetadataURI-uri}."
+				}
+			},
+			"kind": "dev",
+			"methods": {
+				"allFusesBurned(bytes32,uint32)": {
+					"params": {
+						"fuseMask": "The fuses you want to check",
+						"node": "Namehash of the name"
+					},
+					"returns": {
+						"_0": "Boolean of whether or not all the selected fuses are burned"
+					}
+				},
+				"approve(address,uint256)": {
+					"params": {
+						"to": "address to approve",
+						"tokenId": "name to approve"
+					}
+				},
+				"balanceOf(address,uint256)": {
+					"details": "See {IERC1155-balanceOf}. Requirements: - `account` cannot be the zero address."
+				},
+				"balanceOfBatch(address[],uint256[])": {
+					"details": "See {IERC1155-balanceOfBatch}. Requirements: - `accounts` and `ids` must have the same length."
+				},
+				"canExtendSubnames(bytes32,address)": {
+					"params": {
+						"addr": "which address to check permissions for",
+						"node": "namehash of the name to check"
+					},
+					"returns": {
+						"_0": "whether or not is owner/operator or approved"
+					}
+				},
+				"canModifyName(bytes32,address)": {
+					"params": {
+						"addr": "which address to check permissions for",
+						"node": "namehash of the name to check"
+					},
+					"returns": {
+						"_0": "whether or not is owner or operator"
+					}
+				},
+				"extendExpiry(bytes32,bytes32,uint64)": {
+					"params": {
+						"expiry": "When the name will expire in seconds since the Unix epoch",
+						"labelhash": "Labelhash of the name, e.g. vitalik.xyz would be keccak256('vitalik')",
+						"parentNode": "Parent namehash of the name e.g. vitalik.xyz would be namehash('xyz')"
+					},
+					"returns": {
+						"_0": "New expiry"
+					}
+				},
+				"getApproved(uint256)": {
+					"params": {
+						"id": "Namehash of the name"
+					},
+					"returns": {
+						"operator": "Approved operator of a name"
+					}
+				},
+				"getData(uint256)": {
+					"params": {
+						"id": "Namehash of the name"
+					},
+					"returns": {
+						"expiry": "Expiry of the name",
+						"fuses": "Fuses of the name",
+						"owner": "Owner of the name"
+					}
+				},
+				"isApprovedForAll(address,address)": {
+					"details": "See {IERC1155-isApprovedForAll}."
+				},
+				"isWrapped(bytes32)": {
+					"params": {
+						"node": "Namehash of the name"
+					},
+					"returns": {
+						"_0": "Boolean of whether or not the name is wrapped"
+					}
+				},
+				"isWrapped(bytes32,bytes32)": {
+					"params": {
+						"labelhash": "Namehash of the name",
+						"parentNode": "Namehash of the name"
+					},
+					"returns": {
+						"_0": "Boolean of whether or not the name is wrapped"
+					}
+				},
+				"owner()": {
+					"details": "Returns the address of the current owner."
+				},
+				"ownerOf(uint256)": {
+					"params": {
+						"id": "Label as a string of the .eth domain to wrap"
+					},
+					"returns": {
+						"owner": "The owner of the name"
+					}
+				},
+				"recoverFunds(address,address,uint256)": {
+					"details": "The contract is Ownable and only the owner can call the recover function.",
+					"params": {
+						"_amount": "The amount of tokens to recover.",
+						"_to": "The address to send the tokens to.",
+						"_token": "The address of the ERC20 token to recover"
+					}
+				},
+				"registerAndWrapETH2LD(string,address,uint256,address,uint16)": {
+					"details": "Registers a new .eth second-level domain and wraps it.      Only callable by authorised controllers.",
+					"params": {
+						"duration": "The duration, in seconds, to register the name for.",
+						"label": "The label to register (Eg, 'foo' for 'foo.eth').",
+						"ownerControlledFuses": "Initial owner-controlled fuses to set",
+						"resolver": "The resolver address to set on the ENS registry (optional).",
+						"wrappedOwner": "The owner of the wrapped name."
+					},
+					"returns": {
+						"registrarExpiry": "The expiry date of the new name on the .eth registrar, in seconds since the Unix epoch."
+					}
+				},
+				"renew(uint256,uint256)": {
+					"details": "Only callable by authorised controllers.",
+					"params": {
+						"duration": "The number of seconds to renew the name for.",
+						"tokenId": "The hash of the label to register (eg, `keccak256('foo')`, for 'foo.eth')."
+					},
+					"returns": {
+						"expires": "The expiry date of the name on the .eth registrar, in seconds since the Unix epoch."
+					}
+				},
+				"renounceOwnership()": {
+					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
+				},
+				"safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": {
+					"details": "See {IERC1155-safeBatchTransferFrom}."
+				},
+				"safeTransferFrom(address,address,uint256,uint256,bytes)": {
+					"details": "See {IERC1155-safeTransferFrom}."
+				},
+				"setApprovalForAll(address,bool)": {
+					"details": "See {IERC1155-setApprovalForAll}."
+				},
+				"setChildFuses(bytes32,bytes32,uint32,uint64)": {
+					"params": {
+						"expiry": "When the name will expire in seconds since the Unix epoch",
+						"fuses": "Fuses to burn",
+						"labelhash": "Labelhash of the name, e.g. vitalik.xyz would be keccak256('vitalik')",
+						"parentNode": "Parent namehash of the name e.g. vitalik.xyz would be namehash('xyz')"
+					}
+				},
+				"setFuses(bytes32,uint16)": {
+					"params": {
+						"node": "Namehash of the name",
+						"ownerControlledFuses": "Owner-controlled fuses to burn"
+					},
+					"returns": {
+						"_0": "Old fuses"
+					}
+				},
+				"setMetadataService(address)": {
+					"params": {
+						"_metadataService": "The new metadata service"
+					}
+				},
+				"setRecord(bytes32,address,address,uint64)": {
+					"params": {
+						"node": "Namehash of the name to set a record for",
+						"owner": "New owner in the registry",
+						"resolver": "Resolver contract",
+						"ttl": "Time to live in the registry"
+					}
+				},
+				"setResolver(bytes32,address)": {
+					"params": {
+						"node": "namehash of the name",
+						"resolver": "the resolver contract"
+					}
+				},
+				"setSubnodeOwner(bytes32,string,address,uint32,uint64)": {
+					"params": {
+						"expiry": "When the name will expire in seconds since the Unix epoch",
+						"fuses": "Initial fuses for the wrapped subdomain",
+						"label": "Label of the subdomain as a string",
+						"owner": "New owner in the wrapper",
+						"parentNode": "Parent namehash of the subdomain"
+					},
+					"returns": {
+						"node": "Namehash of the subdomain"
+					}
+				},
+				"setSubnodeRecord(bytes32,string,address,address,uint64,uint32,uint64)": {
+					"params": {
+						"expiry": "When the name will expire in seconds since the Unix epoch",
+						"fuses": "initial fuses for the wrapped subdomain",
+						"label": "label of the subdomain as a string",
+						"owner": "new owner in the wrapper",
+						"parentNode": "parent namehash of the subdomain",
+						"resolver": "resolver contract in the registry",
+						"ttl": "ttl in the registry"
+					},
+					"returns": {
+						"node": "Namehash of the subdomain"
+					}
+				},
+				"setTTL(bytes32,uint64)": {
+					"params": {
+						"node": "Namehash of the name",
+						"ttl": "TTL in the registry"
+					}
+				},
+				"setUpgradeContract(address)": {
+					"details": "The default value of upgradeContract is the 0 address. Use the 0 address at any time to make the contract not upgradable.",
+					"params": {
+						"_upgradeAddress": "address of an upgraded contract"
+					}
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+				},
+				"unwrap(bytes32,bytes32,address)": {
+					"details": "Can be called by the owner in the wrapper or an authorised caller in the wrapper",
+					"params": {
+						"controller": "Sets the owner in the registry to this address",
+						"labelhash": "Labelhash of the name, e.g. vitalik.xyz would be keccak256('vitalik')",
+						"parentNode": "Parent namehash of the name e.g. vitalik.xyz would be namehash('xyz')"
+					}
+				},
+				"unwrapETH2LD(bytes32,address,address)": {
+					"details": "Can be called by the owner in the wrapper or an authorised caller in the wrapper",
+					"params": {
+						"controller": "Sets the owner in the registry to this address",
+						"labelhash": "Labelhash of the .eth domain",
+						"registrant": "Sets the owner in the .eth registrar to this address"
+					}
+				},
+				"upgrade(bytes,bytes)": {
+					"details": "Can be called by the owner or an authorised caller",
+					"params": {
+						"extraData": "Extra data to pass to the upgrade contract",
+						"name": "The name to upgrade, in DNS format"
+					}
+				},
+				"uri(uint256)": {
+					"params": {
+						"tokenId": "The id of the token"
+					},
+					"returns": {
+						"_0": "string uri of the metadata service"
+					}
+				},
+				"wrap(bytes,address,address)": {
+					"details": "Can be called by the owner in the registry or an authorised caller in the registry",
+					"params": {
+						"name": "The name to wrap, in DNS format",
+						"resolver": "Resolver contract",
+						"wrappedOwner": "Owner of the name in this contract"
+					}
+				},
+				"wrapETH2LD(string,address,uint16,address)": {
+					"details": "Can be called by the owner of the name on the .eth registrar or an authorised caller on the registrar",
+					"params": {
+						"label": "Label as a string of the .eth domain to wrap",
+						"ownerControlledFuses": "Initial owner-controlled fuses to set",
+						"resolver": "Resolver contract address",
+						"wrappedOwner": "Owner of the name in this contract"
+					}
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"allFusesBurned(bytes32,uint32)": {
+					"notice": "Checks all Fuses in the mask are burned for the node"
+				},
+				"approve(address,uint256)": {
+					"notice": "Approves an address for a name"
+				},
+				"canExtendSubnames(bytes32,address)": {
+					"notice": "Checks if owner/operator or approved by owner"
+				},
+				"canModifyName(bytes32,address)": {
+					"notice": "Checks if owner or operator of the owner"
+				},
+				"extendExpiry(bytes32,bytes32,uint64)": {
+					"notice": "Extends expiry for a name"
+				},
+				"getApproved(uint256)": {
+					"notice": "Gets the owner of a name"
+				},
+				"getData(uint256)": {
+					"notice": "Gets the data for a name"
+				},
+				"isWrapped(bytes32)": {
+					"notice": "Checks if a name is wrapped"
+				},
+				"isWrapped(bytes32,bytes32)": {
+					"notice": "Checks if a name is wrapped in a more gas efficient way"
+				},
+				"ownerOf(uint256)": {
+					"notice": "Gets the owner of a name"
+				},
+				"recoverFunds(address,address,uint256)": {
+					"notice": "Recover ERC20 tokens sent to the contract by mistake."
+				},
+				"renew(uint256,uint256)": {
+					"notice": "Renews a .eth second-level domain."
+				},
+				"setChildFuses(bytes32,bytes32,uint32,uint64)": {
+					"notice": "Sets fuses of a name that you own the parent of"
+				},
+				"setFuses(bytes32,uint16)": {
+					"notice": "Sets fuses of a name"
+				},
+				"setMetadataService(address)": {
+					"notice": "Set the metadata service. Only the owner can do this"
+				},
+				"setRecord(bytes32,address,address,uint64)": {
+					"notice": "Sets records for the name in the ENS Registry"
+				},
+				"setResolver(bytes32,address)": {
+					"notice": "Sets resolver contract in the registry"
+				},
+				"setSubnodeOwner(bytes32,string,address,uint32,uint64)": {
+					"notice": "Sets the subdomain owner in the registry and then wraps the subdomain"
+				},
+				"setSubnodeRecord(bytes32,string,address,address,uint64,uint32,uint64)": {
+					"notice": "Sets the subdomain owner in the registry with records and then wraps the subdomain"
+				},
+				"setTTL(bytes32,uint64)": {
+					"notice": "Sets TTL in the registry"
+				},
+				"setUpgradeContract(address)": {
+					"notice": "Set the address of the upgradeContract of the contract. only admin can do this"
+				},
+				"unwrap(bytes32,bytes32,address)": {
+					"notice": "Unwraps a non .eth domain, of any kind. Could be a DNSSEC name vitalik.xyz or a subdomain"
+				},
+				"unwrapETH2LD(bytes32,address,address)": {
+					"notice": "Unwraps a .eth domain. e.g. vitalik.eth"
+				},
+				"upgrade(bytes,bytes)": {
+					"notice": "Upgrades a domain of any kind. Could be a .eth name vitalik.eth, a DNSSEC name vitalik.xyz, or a subdomain"
+				},
+				"uri(uint256)": {
+					"notice": "Get the metadata uri"
+				},
+				"wrap(bytes,address,address)": {
+					"notice": "Wraps a non .eth domain, of any kind. Could be a DNSSEC name vitalik.xyz or a subdomain"
+				},
+				"wrapETH2LD(string,address,uint16,address)": {
+					"notice": "Wraps a .eth domain, creating a new token and sending the original ERC721 token to this contract"
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"flat/NameWrapperFlat.sol": "NameWrapper"
+		},
+		"evmVersion": "paris",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"flat/NameWrapperFlat.sol": {
+			"keccak256": "0x50b839d00741e71e21937cd24ec89b660ae7c0083c28df278e0c7786955a9faa",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://1685271ac3160f3cdb0bca50e8184525c5789c5cb3547059d8bd5a032ceb4fb9",
+				"dweb:/ipfs/QmQ6GPhsnMSWBdLaARakmmUytetUTTKnQ1TpoeL8VhVk6q"
+			]
+		}
+	},
+	"version": 1
+}

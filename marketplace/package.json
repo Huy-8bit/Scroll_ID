@@ -1,0 +1,26 @@
+{
+  "name": "meme-dns-smart-contract",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.2",
+    "hardhat": "^2.14.1"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.6.0",
+    "@openzeppelin/contracts-upgradeable": "^4.6.0",
+    "@truffle/hdwallet-provider": "^2.1.9",
+    "dotenv": "^16.0.1",
+    "moralis": "^2.13.0",
+    "truffle": "^5.5.13",
+    "truffle-contract-size": "^2.0.1",
+    "truffle-flatten": "^1.0.6",
+    "truffle-privatekey-provider": "^1.2.0"
+  }
+}

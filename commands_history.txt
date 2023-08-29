@@ -1,0 +1,11 @@
+npx hardhat run scripts/1_deploy_ens.js --network scroll
+npx hardhat run scripts/2_setup_root.js --network scroll
+npx hardhat run scripts/3_deploy_reverse_registrar.js --network scroll
+npx hardhat run scripts/4_deploy_base.js --network scroll
+npx hardhat run scripts/5_deploy_metadata.js --network scroll
+npx hardhat run scripts/6_deploy_name_wrapper.js --network scroll
+npx hardhat run scripts/7_deploy_price.js --network scroll
+npx hardhat run scripts/8_deploy_controller.js --network scroll
+npx hardhat run scripts/9_deploy_public.js --network scroll
+npx hardhat run scripts/10_set_rule.js --network scroll
+npx hardhat run scripts/mint.js --network scroll

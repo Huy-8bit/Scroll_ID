@@ -1,0 +1,11 @@
+{
+    "ENSRegistry": "0x8fA00682820C85d7328Bae893F0C99534fDdaF84",
+    "Root": "0xa31eF7fef4f9D7fe52E5D8aD6bdf0f173920d6f6",
+    "ReverseRegistrar": "0xcBC1c4d5383462B44440e38c89Bcd5CE5d60ECB3",
+    "BaseRegistrarImplementation": "0xB8fC7F0435C3ba5F82262F823b33A036fEdB90F4",
+    "StaticMetadataService": "0x5DB8e70983e151d7620a4308D990516791543125",
+    "NameWrapper": "0x391EC3D61e83532dE10b0BA61A876D2a01C4214A",
+    "StablePriceOracle": "0xbc2Add170593BbB6DCcD410844cAfA7f3fCA5Bb4",
+    "ETHRegistrarController": "0x6D901BFEe3Cc870BD086AedF0c38be2A28CD3F2a",
+    "PublicResolver": "0x0d8c5C723a20327607E40e87A6d659eAF2340ecb"
+}
